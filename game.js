@@ -16,8 +16,39 @@ function getComputerSelection() {
   return options[randomIndex];
 }
 
+// Buttons
+const buttonRock = document.getElementById("buttonrock");
+const buttonPaper = document.getElementById("buttonpaper");
+const buttonScissors = document.getElementById("buttonscissors");
+
+// Button to choose and play
+function handleButtonClick() {
+  console.log("Player selected", selection);
+  console.log("Computer selected", getComputerSelection());
+}
+
+buttonRock.addEventListener("click", () => {
+  selection = "rock";
+  handleButtonClick();
+  console.log(playRound(selection));
+});
+
+buttonPaper.addEventListener("click", () => {
+  selection = "paper";
+  handleButtonClick();
+  console.log(playRound(selection));
+});
+
+buttonScissors.addEventListener("click", () => {
+  selection = "scissors";
+  handleButtonClick();
+  console.log(playRound(selection));
+});
+
 // Function to play a single round of the game
 function playRound(playerSelection, computerSelection) {
+  playerSelection = selection;
+  computerSelection = getComputerSelection();
   if (playerSelection === computerSelection) {
     return "Draw";
   } else if (
@@ -66,4 +97,12 @@ function playRound(playerSelection, computerSelection) {
 // }
 
 // Play the game
-playGame();
+// playGame();
+
+// buttonpaper.addEventListener("click", () => {
+//   console.log("Button Paper was clicked");
+// });
+
+// buttonscissors.addEventListener("click", () => {
+//   console.log("Button Scissors was clicked");
+// });
