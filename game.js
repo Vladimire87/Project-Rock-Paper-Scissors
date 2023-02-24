@@ -32,38 +32,38 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // Function to play the game
-function playGame() {
-  let playerScore = 0;
-  let computerScore = 0;
+// function playGame() {
+//   let playerScore = 0;
+//   let computerScore = 0;
 
-  for (let i = 1; i <= 5; i++) {
-    const playerSelection = getPlayerSelection();
-    const computerSelection = getComputerSelection();
-    console.log(`Round ${i}:`);
-    console.log(
-      `Player chose ${playerSelection}, Computer chose ${computerSelection}:`
-    );
-    const result = playRound(playerSelection, computerSelection);
-    console.log(`Result: ${result}`);
+//   for (let i = 1; i <= 5; i++) {
+//     const playerSelection = getPlayerSelection();
+//     const computerSelection = getComputerSelection();
+//     console.log(`Round ${i}:`);
+//     console.log(
+//       `Player chose ${playerSelection}, Computer chose ${computerSelection}:`
+//     );
+//     const result = playRound(playerSelection, computerSelection);
+//     console.log(`Result: ${result}`);
 
-    if (result === "Player Wins") {
-      playerScore++;
-    } else if (result === "Computer Wins") {
-      computerScore++;
-    }
-  }
+//     if (result === "Player Wins") {
+//       playerScore++;
+//     } else if (result === "Computer Wins") {
+//       computerScore++;
+//     }
+//   }
 
-  console.log(`Player Score: ${playerScore}`);
-  console.log(`Computer Score: ${computerScore}`);
+//   console.log(`Player Score: ${playerScore}`);
+//   console.log(`Computer Score: ${computerScore}`);
 
-  if (playerScore > computerScore) {
-    console.log("Player Wins the Game!");
-  } else if (computerScore > playerScore) {
-    console.log("Computer Wins the Game!");
-  } else {
-    console.log("The Game is a Tie!");
-  }
-}
+//   if (playerScore > computerScore) {
+//     console.log("Player Wins the Game!");
+//   } else if (computerScore > playerScore) {
+//     console.log("Computer Wins the Game!");
+//   } else {
+//     console.log("The Game is a Tie!");
+//   }
+// }
 
 // Play the game
 playGame();
