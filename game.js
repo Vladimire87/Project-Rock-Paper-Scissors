@@ -1,32 +1,44 @@
-// Define the game options and convert them to lowercase
-const options = ["rock", "paper", "scissors"];
+// Define the game OPTIONS and convert them to lowercase
+const OPTIONS = ["rock", "paper", "scissors"];
 
 let selection;
+let count = 1;
 
 // Buttons
-const buttonRock = document.getElementById("buttonrock");
-const buttonPaper = document.getElementById("buttonpaper");
-const buttonScissors = document.getElementById("buttonscissors");
+const buttonRock = document.getElementById("buttonRock");
+const buttonPaper = document.getElementById("buttonPaper");
+const buttonScissors = document.getElementById("buttonScissors");
 
 // Function to get the computer's selection
 function getComputerSelection() {
-  const randomIndex = Math.floor(Math.random() * options.length);
-  return options[randomIndex];
+  const randomIndex = Math.floor(Math.random() * OPTIONS.length);
+  return OPTIONS[randomIndex];
 }
 
 // Function to play a single round of the game
 function playRound(playerSelection, computerSelection) {
+  let roundResult;
+
   if (playerSelection === computerSelection) {
-    return "Draw";
+    roundResult = "Draw";
   } else if (
     (playerSelection === "rock" && computerSelection === "scissors") ||
     (playerSelection === "scissors" && computerSelection === "paper") ||
     (playerSelection === "paper" && computerSelection === "rock")
   ) {
-    return "Player Wins";
+    roundResult = "Player Wins";
+    playerCounter++;
   } else {
-    return "Computer Wins";
+    roundResult = "Computer Wins";
+    computerCounter++;
   }
+
+  const playerCounterSpan = document.getElementById("spanplayer");
+  const computerCounterSpan = document.getElementById("spancomputer");
+  playerCounterSpan.textContent = `${playerCounter}`;
+  computerCounterSpan.textContent = `${computerCounter}`;
+
+  return roundResult;
 }
 
 function capitalizeFirstLetter(str) {
@@ -67,15 +79,7 @@ function handleButtonClick() {
 
   // tableBody.textContent = `Player selected: ${playerSelection}, Computer selected: ${computerSelection}, Result: ${roundResult}`;
   tableBody.appendChild(newTrScope);
-
-  if (playerCounter == 5) {
-    alert(`Player wins wins this Round with ${playerCounter}`);
-  } else if (computerCounter == 5) {
-    alert(`Computer wins wins this Round with ${computerCounter}`);
-  }
 }
-
-let count = 1;
 
 buttonRock.addEventListener("click", () => {
   selection = "rock";
