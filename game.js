@@ -1,14 +1,12 @@
 // Define the game options and convert them to lowercase
 const options = ["rock", "paper", "scissors"];
 
-// Function to get the player's selection
-function getPlayerSelection() {
-  let selection;
-  do {
-    selection = prompt("Choose Rock, Paper, or Scissors").toLowerCase().trim();
-  } while (!options.includes(selection));
-  return selection;
-}
+let selection;
+
+// Buttons
+const buttonRock = document.getElementById("buttonrock");
+const buttonPaper = document.getElementById("buttonpaper");
+const buttonScissors = document.getElementById("buttonscissors");
 
 // Function to get the computer's selection
 function getComputerSelection() {
@@ -16,39 +14,8 @@ function getComputerSelection() {
   return options[randomIndex];
 }
 
-// Buttons
-const buttonRock = document.getElementById("buttonrock");
-const buttonPaper = document.getElementById("buttonpaper");
-const buttonScissors = document.getElementById("buttonscissors");
-
-// Button to choose and play
-function handleButtonClick() {
-  console.log("Player selected", selection);
-  console.log("Computer selected", getComputerSelection());
-}
-
-buttonRock.addEventListener("click", () => {
-  selection = "rock";
-  handleButtonClick();
-  console.log(playRound(selection));
-});
-
-buttonPaper.addEventListener("click", () => {
-  selection = "paper";
-  handleButtonClick();
-  console.log(playRound(selection));
-});
-
-buttonScissors.addEventListener("click", () => {
-  selection = "scissors";
-  handleButtonClick();
-  console.log(playRound(selection));
-});
-
 // Function to play a single round of the game
 function playRound(playerSelection, computerSelection) {
-  playerSelection = selection;
-  computerSelection = getComputerSelection();
   if (playerSelection === computerSelection) {
     return "Draw";
   } else if (
@@ -62,47 +29,68 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// Function to play the game
-// function playGame() {
-//   let playerScore = 0;
-//   let computerScore = 0;
+function capitalizeFirstLetter(str) {
+  // converting first letter to uppercase
+  const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
 
-//   for (let i = 1; i <= 5; i++) {
-//     const playerSelection = getPlayerSelection();
-//     const computerSelection = getComputerSelection();
-//     console.log(`Round ${i}:`);
-//     console.log(
-//       `Player chose ${playerSelection}, Computer chose ${computerSelection}:`
-//     );
-//     const result = playRound(playerSelection, computerSelection);
-//     console.log(`Result: ${result}`);
+  return capitalized;
+}
 
-//     if (result === "Player Wins") {
-//       playerScore++;
-//     } else if (result === "Computer Wins") {
-//       computerScore++;
-//     }
-//   }
+let playerCounter = 0;
+let computerCounter = 0;
 
-//   console.log(`Player Score: ${playerScore}`);
-//   console.log(`Computer Score: ${computerScore}`);
+// Button to choose and play
+function handleButtonClick() {
+  const tableBody = document.getElementById("tablebody");
+  const playerSelection = selection;
+  const playerSelectionCapitalized = capitalizeFirstLetter(playerSelection);
+  const computerSelection = getComputerSelection();
+  const computerSelectionCapitalized = capitalizeFirstLetter(computerSelection);
+  const roundResult = playRound(playerSelection, computerSelection);
+  const playerCounterSpan = document.getElementById("spanplayer");
+  const computerCounterSpan = document.getElementById("spancomputer");
+  playerCounterSpan.textContent = `${playerCounter}`;
+  computerCounterSpan.textContent = `${computerCounter}`;
+  const newTrScope = document.createElement("tr");
+  const newTh1Row = document.createElement("th");
+  const newTh2Row = document.createElement("th");
+  const newTh3Row = document.createElement("th");
+  const newTh4Row = document.createElement("th");
+  newTh1Row.textContent = `${count}`;
+  newTh2Row.textContent = `${playerSelectionCapitalized}`;
+  newTh3Row.textContent = `${computerSelectionCapitalized}`;
+  newTh4Row.textContent = `${roundResult}`;
+  newTrScope.appendChild(newTh1Row);
+  newTrScope.appendChild(newTh2Row);
+  newTrScope.appendChild(newTh3Row);
+  newTrScope.appendChild(newTh4Row);
 
-//   if (playerScore > computerScore) {
-//     console.log("Player Wins the Game!");
-//   } else if (computerScore > playerScore) {
-//     console.log("Computer Wins the Game!");
-//   } else {
-//     console.log("The Game is a Tie!");
-//   }
-// }
+  // tableBody.textContent = `Player selected: ${playerSelection}, Computer selected: ${computerSelection}, Result: ${roundResult}`;
+  tableBody.appendChild(newTrScope);
 
-// Play the game
-// playGame();
+  if (playerCounter == 5) {
+    alert(`Player wins wins this Round with ${playerCounter}`);
+  } else if (computerCounter == 5) {
+    alert(`Computer wins wins this Round with ${computerCounter}`);
+  }
+}
 
-// buttonpaper.addEventListener("click", () => {
-//   console.log("Button Paper was clicked");
-// });
+let count = 1;
 
-// buttonscissors.addEventListener("click", () => {
-//   console.log("Button Scissors was clicked");
-// });
+buttonRock.addEventListener("click", () => {
+  selection = "rock";
+  handleButtonClick();
+  count++;
+});
+
+buttonPaper.addEventListener("click", () => {
+  selection = "paper";
+  handleButtonClick();
+  count++;
+});
+
+buttonScissors.addEventListener("click", () => {
+  selection = "scissors";
+  handleButtonClick();
+  count++;
+});
